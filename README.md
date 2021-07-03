@@ -1,6 +1,6 @@
 # Build your own X
 
-[Feinman photo](https://static.commonlounge.com/fp/600w/0Zy2NcEg6MNf1bjqXsCKFku071520494728_kc)
+![Feinman photo](https://silviutolu.com/wp-content/uploads/2020/01/Richard-Feynman-800x535-1-1280x768.jpg)
 
 > What I cannot create, I do not understand. - Richard Feynman
 
