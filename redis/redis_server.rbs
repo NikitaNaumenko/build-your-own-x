@@ -1,0 +1,5 @@
+class RedisServer
+  PORT: Integer
+
+  def initialize(Integer) -> void
+end

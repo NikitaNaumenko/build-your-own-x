@@ -1,0 +1,16 @@
+GEM
+  specs:
+    minitest (5.14.4)
+    rbs (1.0.4)
+    redis (4.2.5)
+
+PLATFORMS
+  arm64-darwin-20
+
+DEPENDENCIES
+  minitest
+  rbs
+  redis
+
+BUNDLED WITH
+   2.2.16
