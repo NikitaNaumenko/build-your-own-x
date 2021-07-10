@@ -1,5 +1,4 @@
-require "minitest/autorun"
-require './resp_decoder'
+require_relative 'test_helper'
 
 class TestRESPDecoder < Minitest::Test
   def test_simple_string

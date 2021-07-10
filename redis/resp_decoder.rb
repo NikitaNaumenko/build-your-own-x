@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'stringio'
 
 class IncompleteRESP < StandardError; end
 
 class RESPDecoder
   class << self
-
     def decode(resp_str)
       resp_io = StringIO.new(resp_str)
       process_decoding(resp_io)
@@ -29,7 +30,7 @@ class RESPDecoder
 
     def decode_array(str_io)
       byte_count_with_clrf = str_io.readline(sep = "\r\n")
-      if byte_count_with_clrf[-2..-1] != "\r\n"
+      if byte_count_with_clrf[-2..] != "\r\n"
         raise IncompleteRESP
       end
 
@@ -39,7 +40,7 @@ class RESPDecoder
 
     def decode_bulk_string(str_io)
       byte_count_with_clrf = str_io.readline(sep = "\r\n")
-      if byte_count_with_clrf[-2..-1] != "\r\n"
+      if byte_count_with_clrf[-2..] != "\r\n"
         raise IncompleteRESP
       end
 
@@ -57,12 +58,11 @@ class RESPDecoder
 
     def decode_simple_string(str_io)
       read = str_io.readline(sep = "\r\n")
-      if read[-2..-1] != "\r\n"
+      if read[-2..] != "\r\n"
         raise IncompleteRESP
       end
 
       read[0..-3]
     end
-
   end
 end

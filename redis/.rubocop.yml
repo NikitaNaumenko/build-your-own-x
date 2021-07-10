@@ -1,0 +1,6 @@
+require:
+  - rubocop-minitest
+  - rubocop-performance
+
+Style/Documentation:
+  Enabled: false

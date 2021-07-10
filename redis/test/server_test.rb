@@ -1,10 +1,19 @@
-require 'redis'
-require "minitest/autorun"
+# frozen_string_literal: true
 
-class TestRedisServer < Minitest::Test
+require_relative 'test_helper'
+
+class TestServer < Minitest::Test
   def setup
     @server_port = 6380
+    # @server = Server.new(@server_port)
+    # @tcp_server = @server.server
+    # Thread.new { @server.listen }
   end
+
+  # def teardown
+  #   @tcp_server.close
+  #   # `kill -9 $(lsof -i :6380 -t)`
+  # end
 
   def test_responds_to_ping
     r = Redis.new(port: @server_port)
