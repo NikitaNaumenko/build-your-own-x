@@ -27,4 +27,11 @@ class TestRedisServer < Minitest::Test
     assert_equal "PONG", r1.ping
     assert_equal "PONG", r2.ping
   end
+
+  def test_echo
+    r = Redis.new(port: @server_port)
+
+    assert_equal "hey", r.echo("hey")
+    assert_equal "hello", r.echo("hello")
+  end
 end
