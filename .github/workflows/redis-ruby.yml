@@ -17,11 +17,12 @@ jobs:
   test:
     defaults:
       run:
-        working-directory: ./redis
+        working-directory: redis
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.6', '2.7', '3.0']
+        ruby-version: ['2.6', '2.7']
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
