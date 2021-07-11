@@ -51,8 +51,14 @@ class Server
       client.write("+#{command.args.first}\r\n")
     elsif command.action.casecmp('set').zero?
       key, value = command.args
-      @store[key] = value
-      client.write("+OK\r\n")
+      if @store[key]
+        old_value = @store[key]
+        @store[key] = value
+        client.write("$#{old_value.length}\r\n#{old_value}\r\n")
+      else
+        @store[key] = value
+        client.write("+OK\r\n")
+      end
     elsif command.action.casecmp('get').zero?
       key = command.args.first
       value = @store[key]

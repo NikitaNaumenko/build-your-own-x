@@ -48,6 +48,7 @@ class TestServer < Minitest::Test
     r = Redis.new(port: @server_port)
 
     assert_equal 'OK', r.set('mykey', 'myvalue')
+    assert_equal 'myvalue', r.set('mykey', 'jopa')
   end
 
   def test_get
