@@ -10,6 +10,7 @@ class Server
   def initialize(port)
     @server = TCPServer.new(port)
     @clients_by_socket = {}
+    @store = {}
   end
 
   def listen
@@ -48,6 +49,18 @@ class Server
       client.write("+PONG\r\n")
     elsif command.action.casecmp('echo').zero?
       client.write("+#{command.args.first}\r\n")
+    elsif command.action.casecmp('set').zero?
+      key, value = command.args
+      @store[key] = value
+      client.write("+OK\r\n")
+    elsif command.action.casecmp('get').zero?
+      key = command.args.first
+      value = @store[key]
+      if value
+        client.write("$#{value.length}\r\n#{value}\r\n")
+      else
+        client.write("$-1\r\n")
+      end
     else
       raise RuntimeError("Unhandled command: #{command.action}")
     end
