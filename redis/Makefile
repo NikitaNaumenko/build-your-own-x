@@ -1,5 +1,5 @@
 start-server:
-	ruby -Ivendor/ruby/2.7.2/gems/**/lib daemon.rb start
+	ruby -Ivendor/ruby/2.7.0/gems/**/lib daemon.rb start
 
 test:
 	ruby redis_server_test.rb
@@ -9,7 +9,7 @@ test-decoder:
 
 stop-server:
 	# kill -9 $(lsof -i tcp:6380 -t)
-	ruby -Ivendor/ruby/2.7.2/gems/**/lib daemon.rb stop
+	ruby -Ivendor/ruby/2.7.0/gems/**/lib daemon.rb stop
 
 
 .PHONY: test
