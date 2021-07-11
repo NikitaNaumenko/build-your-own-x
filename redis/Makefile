@@ -1,5 +1,5 @@
 start-server:
-	ruby -I../vendor/bundle daemon.rb start
+	ruby -I../vendor/bundle/ruby daemon.rb start
 
 test:
 	ruby redis_server_test.rb
@@ -9,7 +9,7 @@ test-decoder:
 
 stop-server:
 	# kill -9 $(lsof -i tcp:6380 -t)
-	ruby -I../vendor/bundle daemon.rb stop
+	ruby -I../vendor/bundle/ruby daemon.rb stop
 
 
 .PHONY: test
