@@ -45,30 +45,10 @@ class Server
   end
 
   def handle_command(client, command)
-    if command.action.casecmp('ping').zero?
-      client.write("+PONG\r\n")
-    elsif command.action.casecmp('echo').zero?
-      client.write("+#{command.args.first}\r\n")
-    elsif command.action.casecmp('set').zero?
-      key, value = command.args
-      if @store[key]
-        old_value = @store[key]
-        @store[key] = value
-        client.write("$#{old_value.length}\r\n#{old_value}\r\n")
-      else
-        @store[key] = value
-        client.write("+OK\r\n")
-      end
-    elsif command.action.casecmp('get').zero?
-      key = command.args.first
-      value = @store[key]
-      if value
-        client.write("$#{value.length}\r\n#{value}\r\n")
-      else
-        client.write("$-1\r\n")
-      end
-    else
-      raise RuntimeError("Unhandled command: #{command.action}")
-    end
+    handler = command.dispatch
+    raise "Unhandled command: #{command.action}" unless handler
+
+    handler.call(client: client, store: @store)
+
   end
 end
