@@ -36,6 +36,8 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
+    - name: inspect
+      run: ls -l
     - name: Run redis server
       run: make start-server
 
