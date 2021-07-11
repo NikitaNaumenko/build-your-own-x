@@ -36,7 +36,7 @@ jobs:
         working-directory: redis
 
     - name: inspect
-      run: cd vendor && cd bundle && cd ruby && cd ruby && ls -la
+      run: cd vendor && cd bundle && cd ruby && cd 2.7.0 && ls -la
     - name: Run redis server
       run: make start-server
 
