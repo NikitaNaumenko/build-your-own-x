@@ -4,3 +4,6 @@
 * https://redis.io/commands/set
 * https://redis.io/topics/distlock
 * https://redis.io/commands/get
+
+TODO:
+* move to ruby3

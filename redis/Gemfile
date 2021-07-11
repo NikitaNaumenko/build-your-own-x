@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 gem 'minitest'
-gem 'rbs'
+gem 'daemons'
+# gem 'rbs'
 gem 'redis'
 gem 'rubocop'
 gem 'rubocop-minitest'

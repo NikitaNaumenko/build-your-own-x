@@ -1,5 +1,5 @@
 start-server:
-	ruby main.rb
+	ruby daemon.rb start
 
 test:
 	ruby redis_server_test.rb
@@ -8,7 +8,8 @@ test-decoder:
 	ruby resp_decoder_test.rb
 
 stop-server:
-	kill -9 $(lsof -i tcp:6380 -t)
+	# kill -9 $(lsof -i tcp:6380 -t)
+	ruby daemon.rb stop
 
 
 .PHONY: test
