@@ -15,12 +15,13 @@ on:
 
 jobs:
   test:
-
+    defaults:
+      run:
+        working-directory: ./redis
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: ['2.6', '2.7', '3.0']
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -31,5 +32,12 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+    - name: Run redis server
+      run: make start-server
+
     - name: Run tests
       run: bundle exec rake
+
+    - name: Stop redis server
+      run: make stop-server
