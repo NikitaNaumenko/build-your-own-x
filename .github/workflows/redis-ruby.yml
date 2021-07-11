@@ -37,7 +37,7 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
     - name: inspect
-      run: cd .. && ls -la
+      run: cd .. && cd vendor && cd bundle && ls -la
     - name: Run redis server
       run: make start-server
 
