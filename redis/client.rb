@@ -5,6 +5,22 @@ require_relative 'resp_decoder'
 class Client
   attr_reader :socket
 
+  class Value
+    attr_accessor :value, :byte_size, :ex
+
+    def initialize(value, byte_size, options = {})
+      @value = value
+      @byte_size = byte_size
+      @ex = Time.now + options[:ex].to_i if options[:ex]
+    end
+
+    def expired?
+      return false unless @ex
+
+      @ex < Time.now
+    end
+  end
+
   def initialize(socket)
     @socket = socket
     @buffer = ''
@@ -35,13 +51,14 @@ class Client
   end
 
   def set(args, store)
-    key, value = args
+    (key, value), *options = args.each_slice(2).to_a
+    parsed_options = parse_options(options)
     if store[key]
       old_value = store[key]
-      store[key] = value
-      write("$#{old_value.length}\r\n#{old_value}\r\n")
+      store[key] = build_value(value, parsed_options)
+      write("$#{old_value.byte_size}\r\n#{old_value.value}\r\n")
     else
-      store[key] = value
+      store[key] = build_value(value, parsed_options)
       write("+OK\r\n")
     end
   end
@@ -49,10 +66,24 @@ class Client
   def get(args, store)
     key = args.first
     value = store[key]
-    if value
-      write("$#{value.length}\r\n#{value}\r\n")
+    if value && !value.expired?
+      write("$#{value.byte_size}\r\n#{value.value}\r\n")
     else
       write("$-1\r\n")
     end
+  end
+
+  private
+
+  def parse_options(options)
+    map = { 'EX' => :ex }
+    options.each_with_object({}) do |(key, value), acc|
+      mapped_key = map[key]
+      acc[mapped_key] = value
+    end
+  end
+
+  def build_value(value, options = {})
+    Value.new(value, value.length, options)
   end
 end
