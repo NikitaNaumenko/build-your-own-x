@@ -6,4 +6,9 @@
 * https://redis.io/commands/get
 
 TODO:
+* Add more options for set(EX, PX, EXAT, PXAT, NX, XX, KEEPTTL)
+* Add more options for get
+* Implement distlock alghtorhitm
+* Refactor store
+* Refactor Value
 * move to ruby3
