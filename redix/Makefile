@@ -8,7 +8,7 @@ test-decoder:
 	ruby resp_decoder_test.rb
 
 stop-server:
-	kill -9 $(lsof -i tcp:6380 -t)
+	kill -9 $$(lsof -i tcp:6380 -t)
 
 
 .PHONY: test
