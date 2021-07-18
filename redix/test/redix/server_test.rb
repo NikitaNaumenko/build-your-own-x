@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'test_helper'
+require 'test_helper'
 
-class TestServer < Minitest::Test
+class Redix::ServerTest < Minitest::Test
   def setup
     @redis = Redis.new(port: 6380)
   end

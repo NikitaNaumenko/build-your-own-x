@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require 'redix'
+require 'daemons'
+
+Daemons.call do
+  Redix.run_server
+end
