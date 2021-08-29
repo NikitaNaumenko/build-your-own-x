@@ -1,0 +1,11 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}}
+ :aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.7.0"}
+                                cider/cider-nrepl {:mvn/version "0.25.6"}}
+                   :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]" "--interactive"]}
+           :test {:extra-paths ["test"]
+                  :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
+                               io.github.cognitect-labs/test-runner
+                               {:git/url "https://github.com/cognitect-labs/test-runner"
+                                :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
+                  :exec-fn cognitect.test-runner.api/test}}}
