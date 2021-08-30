@@ -1,1 +1,0 @@
-(ns git.core)
