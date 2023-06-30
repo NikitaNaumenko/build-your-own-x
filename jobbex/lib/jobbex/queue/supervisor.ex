@@ -9,6 +9,6 @@ defmodule Jobbex.Queue.Supervisor do
   @impl Supervisor
   def init(_opts) do
     children = []
-    Supervisor.start_link(children, strategy: :one_for_one)
+    Supervisor.init(children, strategy: :one_for_one)
   end
 end
