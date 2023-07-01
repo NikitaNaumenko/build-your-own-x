@@ -8,7 +8,9 @@ defmodule Jobbex.Queue.Supervisor do
 
   @impl Supervisor
   def init(_opts) do
-    children = []
+    children = [
+      {Task.Supervisor, name: Jobbex.Foreman}
+    ]
     Supervisor.init(children, strategy: :one_for_one)
   end
 end

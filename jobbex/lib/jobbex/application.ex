@@ -4,7 +4,8 @@ defmodule Jobbex.Application do
   def start(_type, _args) do
     children = [
       {Registry, keys: :unique, name: Jobbex.Registry},
-      Jobbex.StorageSupervisor
+      Jobbex.StorageSupervisor,
+      {Task.Supervisor, name: Jobbex.Foreman}
     ]
 
     Supervisor.start_link(children,
